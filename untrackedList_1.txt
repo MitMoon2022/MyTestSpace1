@@ -1,0 +1,9 @@
+	.vscode/
+        CallanExE/CallanEXE.exe
+        Ch5_stData.out
+        Ch5_stData.txt
+        Chap12-Class/.vscode/
+        Chap12-Class/ClockType.exe
+        RandomAccess/Ex4.exe
+        RandomAccess/digitsAndAlphabet.txt
+        cfloat/cfloat.exe
