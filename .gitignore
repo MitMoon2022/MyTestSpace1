@@ -1,3 +1,8 @@
 vscode1/
 *.exe
 /log
+
+#Date file to be ignored
+*.out
+*.txt
+*.dat
