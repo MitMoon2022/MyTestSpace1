@@ -6,3 +6,7 @@ vscode1/
 *.out
 *.txt
 *.dat
+
+#under .vscode
+/vscode
+*.json
