@@ -18,6 +18,6 @@ int main()
     }
     cout << endl;
 	
-	cout<<"The End"<<endl;
+	cout<<"---The End---"<<endl;
 
 }
