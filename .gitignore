@@ -10,3 +10,10 @@ vscode1/
 #under .vscode
 /vscode
 *.json
+/Proj_virtualClass/.vs
+/*.mp4
+/Proj_virtualClass/*.gitignore
+/Proj_virtualClass/*.sln
+/Proj_virtualClass/*.vcxproj
+/Proj_virtualClass/*.filters
+/Proj_virtualClass/*.user
