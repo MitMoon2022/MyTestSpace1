@@ -8,7 +8,7 @@ for (int i = 0 ; i<10 ; i++)
         cout<<i<<" ";
     cout<<endl;
     
-    cout<<"test";
+
 
 return 0;
 }
