@@ -20,9 +20,11 @@
 			"problemMatcher": [
 				"$gcc"
 			],
-			"group": "build",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
 			"detail": "compiler: D:/jftMit1/MinGW/bin/g++.exe"
-		},
-		
+		}
 	]
 }
