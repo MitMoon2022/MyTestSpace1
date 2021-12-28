@@ -17,3 +17,4 @@ vscode1/
 /Proj_virtualClass/*.vcxproj
 /Proj_virtualClass/*.filters
 /Proj_virtualClass/*.user
+/.vs/slnx.sqlite
