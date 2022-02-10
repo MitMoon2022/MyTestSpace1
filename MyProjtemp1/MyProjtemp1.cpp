@@ -2,10 +2,58 @@
 //
 
 #include <iostream>
+#include "CpersonType.h"
+
+using namespace std;
+
+enum TASK_STATUS
+{
+    TASK_IN_PROGRESS,
+    TASK_COMPLETE,
+    TASK_ERROR,
+    //
+    TASK_HALT,  // to halt task for recovry purpose
+    //
+    TASK_EOL,   // to perform intape eol when machine eol
+    //
+    TASK_STOP,  // mcstop 
+    //
+    TASK_SKIP,
+    //
+    TASK_STANDBY,
+
+    TASK_CONSECUTIVE_EMPTY,
+
+};
+
+int IndexerModAxisHoming()
+{
+    cout << "Inside a function" << endl;
+    return TASK_COMPLETE;
+}
+
+
+
 
 int main()
 {
     std::cout << "Hello World!\n";
+
+    TASK_STATUS st;
+    st = TASK_STOP;
+
+    cout << "What is the st now: " << st << endl;
+    cout << "Size of enum variable " << sizeof(st) << " bytes." << endl;
+    //--------------------------------------------------------------------
+    TASK_STATUS current = TASK_STATUS(IndexerModAxisHoming());
+    cout << "What is the current status now: " << current << endl;
+    //--------------------------------------------------------------------
+    personType p1{ "Amy","Lim" };
+    p1.print();
+
+
+
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

@@ -18,5 +18,13 @@
     <ClCompile Include="MyProjtemp1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CpersonType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CpersonType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
