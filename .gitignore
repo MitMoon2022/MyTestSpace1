@@ -6,6 +6,7 @@ vscode1/
 *.out
 *.txt
 *.dat
+*.vs
 
 #under .vscode
 /vscode
