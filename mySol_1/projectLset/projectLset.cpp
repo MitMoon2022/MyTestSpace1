@@ -3,10 +3,17 @@
 
 #include <iostream>
 #include "Person.h"
+#include <thread>
+
+using namespace std;
+
+void hello(string& s) {
+    s = "xyz";
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    cout << "Hello World!\n";
     //------------------------------
     personType p1("Tom", "Tan");
     p1.print();
@@ -15,6 +22,14 @@ int main()
     //-----------------------------
     personType p2("Jacky", "Lim");
     p2.print();
+    //-----------------------------
+    string str{ "abc" };
+    thread t{ hello, std::ref(str) };
+    t.join();
+    cout << "str is now " << str << endl;
+
+
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
