@@ -290,3 +290,4 @@ paket-files/
 __pycache__/
 *.pyc
 
+/mySol_1/.vs
