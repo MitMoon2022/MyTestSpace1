@@ -18,12 +18,22 @@ Ctest1::Ctest1(CWnd* pParent /*=NULL*/)
     , m_ReelMap("ETabTab")
 {
         int iPos = m_ReelMap.ReverseFind(TRAILER_POCKET);
+        //int ilen = m_ReelMap.GetLength();
             if (iPos != -1) //return -1 when it cannot found it.
             {
                 //Trace("Found No T");
                 //m_text = ("Found T at ");
                 //_tprintf_s(_T("%s %d.\n"), (LPCTSTR)m_text, howmany);  
-                m_text.Format(L"T is at %d",iPos);
+                m_text.Format(L"T is at %d.\r\n",iPos);         //Windows require line ends to be the combination of \r\n, and not just \n. Add the \r and your lines will break properly.
+                
+                CString strLen;
+                int length = m_ReelMap.GetLength();
+                strLen.Format(L"\nm_ReelMap contains %d characters", length);
+
+                m_text.Append(strLen);
+                //CString string2("lenght is %d\n", ilen);
+               // m_text.Append(string2);
+
                 
             }
             else
