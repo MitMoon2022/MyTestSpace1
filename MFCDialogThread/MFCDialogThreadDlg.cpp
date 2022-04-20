@@ -11,6 +11,14 @@
 #define new DEBUG_NEW
 #endif
 
+//For Lesson50 control of CWinThread
+//Step1: Declare a CWinThread ptr_object
+CWinThread* g_pThreadA;     //instantiate it with a name. remember to null it.
+//if you want to suspend and resume or check it.
+BOOL g_bRunningA;   //track the thread
+
+
+
 //Step2: Create the implement of the thread DemoA
 UINT DemoA(LPVOID pParam)
 {
@@ -18,10 +26,11 @@ UINT DemoA(LPVOID pParam)
      for(int m=1; m<=100; m++)
     {
         //SetDlgItemInt(IDC_OUTPUT1,i);
+        if(!g_bRunningA) break;
         ::SetDlgItemInt(AfxGetApp()->m_pMainWnd->m_hWnd,IDC_OUTPUT2,m,false);
-        Sleep(500);
+        Sleep(100);
     }
-
+    g_pThreadA = NULL;  //Need to null it after complete of the process.
     return 0;
 }
 //Step (repeated): create another one.
@@ -79,6 +88,10 @@ CMFCDialogThreadDlg::CMFCDialogThreadDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CMFCDialogThreadDlg::IDD, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+    //L50: step2: null the ptr.
+    g_pThreadA = NULL;
+    g_bRunningA = FALSE;
+
 }
 
 void CMFCDialogThreadDlg::DoDataExchange(CDataExchange* pDX)
@@ -93,6 +106,9 @@ BEGIN_MESSAGE_MAP(CMFCDialogThreadDlg, CDialogEx)
     ON_BN_CLICKED(IDC_BUTTON1, &CMFCDialogThreadDlg::OnBnClickedButton1)
     ON_BN_CLICKED(IDC_BUTTON2, &CMFCDialogThreadDlg::OnBnClickedButton2)
     ON_BN_CLICKED(IDC_BUTTON3, &CMFCDialogThreadDlg::OnBnClickedButton3)
+    ON_BN_CLICKED(IDC_BUTTON4, &CMFCDialogThreadDlg::OnBnClickedButton4)
+    ON_BN_CLICKED(IDC_BUTTON5, &CMFCDialogThreadDlg::OnBnClickedButton5)
+    ON_BN_CLICKED(IDC_BUTTON6, &CMFCDialogThreadDlg::OnBnClickedButton6)
 END_MESSAGE_MAP()
 
 
@@ -196,11 +212,19 @@ void CMFCDialogThreadDlg::OnBnClickedButton1()
 
 
 
-void CMFCDialogThreadDlg::OnBnClickedButton2()
+void CMFCDialogThreadDlg::OnBnClickedButton2()      //Start Thread
 {
     // TODO: Add your control notification handler code here
-    AfxBeginThread(DemoA, NULL);
-
+    //Lesson50 - control of CWinThread implement
+    if(g_pThreadA == NULL)
+    {
+        g_pThreadA = AfxBeginThread(DemoA, NULL);
+        g_bRunningA = TRUE;
+    }
+    else
+    {
+        AfxMessageBox(_T("Thread is already running!"));
+    }
 }
 
 
@@ -209,5 +233,53 @@ void CMFCDialogThreadDlg::OnBnClickedButton3()
     // TODO: Add your control notification handler code here
 
     AfxBeginThread(DemoB, NULL);
+
+}
+
+
+void CMFCDialogThreadDlg::OnBnClickedButton4()  //Suspend
+{
+    // TODO: Add your control notification handler code here
+    if(g_pThreadA == NULL)
+    {
+        AfxMessageBox(_T("Thread does not exit!"));
+    }
+    else
+    {
+        g_pThreadA->SuspendThread();    //Suspend.
+    }
+
+
+}
+
+
+void CMFCDialogThreadDlg::OnBnClickedButton5()      //Resume.
+{
+    // TODO: Add your control notification handler code here
+    if(g_pThreadA == NULL)
+    {
+        AfxMessageBox(_T("Thread does not exit!"));
+    }
+    else
+    {
+        //g_pThreadA->
+        g_pThreadA->ResumeThread(); //Resume.  
+    }
+}
+
+
+void CMFCDialogThreadDlg::OnBnClickedButton6()  //EndThread
+{
+    // TODO: Add your control notification handler code here
+    if(g_pThreadA == NULL)
+    {
+        AfxMessageBox(_T("Thread does not exit!"));
+    }
+    else
+    {
+        g_bRunningA = FALSE;
+        //g_pThreadA->ResumeThread(); //Resume.  
+    }
+
 
 }
