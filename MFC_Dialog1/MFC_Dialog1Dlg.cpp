@@ -12,6 +12,9 @@
 #endif
 
 
+#define Timer1 1    //Timer with 200msec
+#define Timer2 2    //Timer with 500msec
+
 // CMFC_Dialog1Dlg dialog
 
 
@@ -20,19 +23,25 @@
 CMFC_Dialog1Dlg::CMFC_Dialog1Dlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CMFC_Dialog1Dlg::IDD, pParent)
     , m_text(_T("Hello World!"))
+    , m_strTimer1(_T("0"))
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+    num = 0;
 }
 
 void CMFC_Dialog1Dlg::DoDataExchange(CDataExchange* pDX)
 {
     CDialogEx::DoDataExchange(pDX);
     DDX_Text(pDX, IDC_EDIT1, m_text);
+    DDX_Text(pDX, IDC_STATIC_T1, m_strTimer1);
 }
 
 BEGIN_MESSAGE_MAP(CMFC_Dialog1Dlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+    ON_BN_CLICKED(IDC_TStart1, &CMFC_Dialog1Dlg::OnBnClickedTstart1)
+    ON_BN_CLICKED(IDC_TStop1, &CMFC_Dialog1Dlg::OnBnClickedTstop1)
+    ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 
@@ -88,3 +97,43 @@ HCURSOR CMFC_Dialog1Dlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+
+void CMFC_Dialog1Dlg::OnBnClickedTstart1()
+{
+    // TODO: Add your control notification handler code here
+    //SetTimer(Timer1,200,NULL);  //T1
+
+    SetTimer(Timer2,1000,NULL); //T2
+}
+
+
+void CMFC_Dialog1Dlg::OnBnClickedTstop1()
+{
+    // TODO: Add your control notification handler code here
+    KillTimer(1);
+    num = 0;
+}
+
+
+void CMFC_Dialog1Dlg::OnTimer(UINT_PTR nIDEvent)
+{
+    // TODO: Add your message handler code here and/or call default
+
+    if(nIDEvent == Timer1)  //200msec per tick
+    {
+        //num++;
+        m_strTimer1.Format(_T("%d"),num);
+        num++;
+    }
+
+    if(nIDEvent == Timer2)  //1000 msec per tick
+    {
+        //num++;
+        m_strTimer1.Format(_T("%d"),num);
+        num++;
+    }
+
+    UpdateData(FALSE);  //Need there to update the count number
+    CDialogEx::OnTimer(nIDEvent);
+}
