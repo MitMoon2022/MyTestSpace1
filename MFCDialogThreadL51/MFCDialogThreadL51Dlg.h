@@ -18,6 +18,7 @@ class CMFCDialogThreadL51Dlg : public CDialogEx
 public:
 	CMFCDialogThreadL51Dlg(CWnd* pParent = NULL);	// standard constructor
 
+    ~CMFCDialogThreadL51Dlg();  //require a destructor for "new"
 // Dialog Data
 	enum { IDD = IDD_MFCDIALOGTHREADL51_DIALOG };
 

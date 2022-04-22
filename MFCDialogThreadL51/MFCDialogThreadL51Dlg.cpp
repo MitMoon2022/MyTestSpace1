@@ -15,18 +15,85 @@
 int k = 1;      //share resource - could be any datatype like class, doc.
 int total=0;    //share resource
 
+//L52
+//CCriticalSection
+//CMutex
+//CSemahore
+//CEvent
+
+//Easiest is CCritialSection
+CCriticalSection* g_pCS;    //step1: declare a ptr with datatype CCriticalSection
+CMutex* g_pMutex;           //another method.
+CSemaphore* g_pSemaphore;   //
+CEvent* g_pEvent;
+
 
 UINT ThreadProcA(LPVOID pParam)
 {   
     //Work done by the thread
-    for(int i=1; i<=1000000000; i++)
+    // Using CCsection
+    //for(int i=1; i<=100000000; i++)
+    //{
+    //    //Add Lock the shared resources
+    //    g_pCS->Lock();
+    //    k = k*2;
+    //    k = k/2;
+    //    total +=k;
+    //    //Add Unlock
+    //    g_pCS->Unlock();
+    //}
+
+    //For Mutex - using singleLock
+    //CSingleLock singleLock(g_pMutex);
+    // for(int i=1; i<=100000000; i++)
+    //{
+    //    //Add Lock the shared resources
+    //    singleLock.Lock();      //Lock it so no one could access to the shared resources
+    //    if(singleLock.IsLocked())
+    //    {
+    //        k = k*2;
+    //        k = k/2;
+    //        total +=k;
+    //        //Add Unlock
+    //        singleLock.Unlock();
+    //    }
+    //   
+    //}
+
+    //For Semaphore
+    // CSingleLock singleLock(g_pSemaphore);
+    // for(int i=1; i<=100000000; i++)
+    //{
+    //    //Add Lock the shared resources
+    //    singleLock.Lock();      //Lock it so no one could access to the shared resources
+    //    if(singleLock.IsLocked())
+    //    {
+    //        k = k*2;
+    //        k = k/2;
+    //        total +=k;
+    //        //Add Unlock
+    //        singleLock.Unlock();
+    //    }
+    //   
+    //}
+//-----For CEvent -------------------------------
+     CSingleLock singleLock(g_pEvent);
+     for(int i=1; i<=100000; i++)
     {
         //Add Lock the shared resources
-        k = k*2;
-        k = k/2;
-        total +=k;
-        //Add Unlock
-    }
+        singleLock.Lock();      //Lock it so no one could access to the shared resources
+        if(singleLock.IsLocked())
+        {
+            k = k*2;
+            k = k/2;
+            total +=k;
+            //Add Unlock
+            singleLock.Unlock();
+            g_pEvent->SetEvent();
+        }
+      
+    }//end_for
+//------------------------------------------------
 
     ::SetDlgItemInt(AfxGetApp()->m_pMainWnd->m_hWnd,IDC_OUTPUT,total,false);
     return 0;
@@ -34,11 +101,29 @@ UINT ThreadProcA(LPVOID pParam)
 UINT ThreadProcB(LPVOID pParam)
 {   
     //Work done by the thread
-    for(int j=1; j<=1000000000; j++)
+  /*  for(int j=1; j<=100000000; j++)
     {
+        g_pCS->Lock();
         k = k*2;
         k = k/2;
         total +=k;
+        g_pCS->Unlock();
+    }*/
+
+    //For Mutex - using singleLock
+    CSingleLock singleLock(g_pMutex);
+    for(int j=1; j<=100000000; j++)
+    {
+       //add your control/Lock
+        singleLock.Lock();      //Lock it so no one could access to the shared resources
+        if(singleLock.IsLocked())
+        {
+            k = k*2;
+            k = k/2;
+            total +=k;
+            singleLock.Unlock();    //rem to unlock it.
+        }
+       
     }
 
     ::SetDlgItemInt(AfxGetApp()->m_pMainWnd->m_hWnd,IDC_OUTPUT,total,false);
@@ -85,8 +170,33 @@ CMFCDialogThreadL51Dlg::CMFCDialogThreadL51Dlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CMFCDialogThreadL51Dlg::IDD, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+
+   // g_pCS = new CCriticalSection(); //step2 after declaration. (whenever using new - need to delete it.
+    g_pMutex = new CMutex();
+    g_pSemaphore = new CSemaphore(1,1);
+    g_pEvent = new CEvent(TRUE);
 }
 
+CMFCDialogThreadL51Dlg::~CMFCDialogThreadL51Dlg()
+{
+    //Remember to delete *ptr
+    delete g_pCS;
+    g_pCS = NULL;
+
+    //for CMutex
+    delete g_pMutex;
+    g_pMutex = NULL;
+
+    //delete CSemaphore
+    delete g_pSemaphore;
+    g_pSemaphore =NULL;
+
+    //delete CEvent
+    delete g_pEvent;
+    g_pEvent = NULL;
+
+
+}
 void CMFCDialogThreadL51Dlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
