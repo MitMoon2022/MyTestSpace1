@@ -35,4 +35,5 @@ public:
     afx_msg void OnBnClickedTstart1();
     afx_msg void OnBnClickedTstop1();
     afx_msg void OnTimer(UINT_PTR nIDEvent);
+    CString m_CurrentTime;
 };

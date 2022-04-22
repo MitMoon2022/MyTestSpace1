@@ -24,6 +24,7 @@ CMFC_Dialog1Dlg::CMFC_Dialog1Dlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CMFC_Dialog1Dlg::IDD, pParent)
     , m_text(_T("Hello World!"))
     , m_strTimer1(_T("0"))
+    , m_CurrentTime(_T(""))
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
     num = 0;
@@ -34,6 +35,7 @@ void CMFC_Dialog1Dlg::DoDataExchange(CDataExchange* pDX)
     CDialogEx::DoDataExchange(pDX);
     DDX_Text(pDX, IDC_EDIT1, m_text);
     DDX_Text(pDX, IDC_STATIC_T1, m_strTimer1);
+    DDX_Text(pDX, IDC_CURRENT_TIME, m_CurrentTime);
 }
 
 BEGIN_MESSAGE_MAP(CMFC_Dialog1Dlg, CDialogEx)
@@ -133,7 +135,33 @@ void CMFC_Dialog1Dlg::OnTimer(UINT_PTR nIDEvent)
         m_strTimer1.Format(_T("%d"),num);
         num++;
     }
+    //-------------------------------------------------------------------
+    CTime CurrentTime = CTime::GetCurrentTime();
 
+    int iHours   = CurrentTime.GetHour();
+    int iMinutes = CurrentTime.GetMinute();
+    int iSeconds = CurrentTime.GetSecond();
+    CString strHours, strMinutes, strSeconds;
+
+    if( iHours < 10 )
+	strHours.Format(_T("0%d"), iHours);
+    else
+	strHours.Format(_T("%d"), iHours);
+
+    if( iMinutes < 10 )
+	strMinutes.Format(_T("0%d"), iMinutes);
+    else
+	strMinutes.Format(_T("%d"), iMinutes);
+
+    if( iSeconds < 10 )
+	strSeconds.Format(_T("0%d"), iSeconds);
+    else
+	strSeconds.Format(_T("%d"), iSeconds);
+
+    m_CurrentTime.Format(_T("%s:%s:%s"), strHours, strMinutes, strSeconds);
+
+
+    //-------------------------------------------------------------------
     UpdateData(FALSE);  //Need there to update the count number
     CDialogEx::OnTimer(nIDEvent);
 }
