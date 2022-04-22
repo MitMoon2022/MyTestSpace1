@@ -7,7 +7,7 @@
 #include "afxdialogex.h"
 #include "afx.h"
 
-
+//This is a Single document SDI - then i create/add a new dialog 
 // Ctest1 dialog
 
 IMPLEMENT_DYNAMIC(Ctest1, CDialog)
