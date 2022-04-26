@@ -30,4 +30,5 @@ public:
     // input text from the textbox
     CString m_text;
     CString m_ReelMap;
+    CString m_letter;
 };

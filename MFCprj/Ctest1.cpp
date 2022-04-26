@@ -16,6 +16,7 @@ Ctest1::Ctest1(CWnd* pParent /*=NULL*/)
 	: CDialog(Ctest1::IDD, pParent)
     , m_text(_T("Please typo your name here."))
     , m_ReelMap("ETabTab")
+    , m_letter("01.02.01")
 {
         int iPos = m_ReelMap.ReverseFind(TRAILER_POCKET);
         //int ilen = m_ReelMap.GetLength();
@@ -34,6 +35,15 @@ Ctest1::Ctest1(CWnd* pParent /*=NULL*/)
                 //CString string2("lenght is %d\n", ilen);
                // m_text.Append(string2);
 
+
+             int nIndex = 16;
+
+             CString csTestVersion;
+             csTestVersion.Format(L"%c", 'A' + nIndex - 1);  //csTestVersion
+             m_letter += csTestVersion;
+             m_text.Append(L"\r\n");
+             m_text.Append(m_letter);
+
                 
             }
             else
@@ -41,6 +51,10 @@ Ctest1::Ctest1(CWnd* pParent /*=NULL*/)
                 //Trace("Found T at %d.", iPos);
                 m_text = _T("Found no T.");
             }
+    //----------------------------------------------------------------
+           
+
+
 }
 
 Ctest1::~Ctest1()
