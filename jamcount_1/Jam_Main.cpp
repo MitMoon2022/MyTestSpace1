@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>      // for c-style string functions
 #include <cctype>       // for character-based functions
+#include <vector>       //make use of vector
 //#include <chrono>
 #include "stdafx.h"
 
@@ -9,8 +10,8 @@ using namespace std;
 struct MonitorAlarm
 {
     int iCurrCount;             //monitor the current Count
-    CTime stTimeRecord[10];
-    CTime stMinExpire[10];       //expired timing = Start + time limit
+    vector<CTime> stTimeRecord;      //CTime stTimeRecord[10];
+    vector<CTime> stMinExpire;      //CTime stMinExpire[10];       //expired timing = Start + time limit
 };
 
 struct Time {
@@ -81,11 +82,14 @@ int main() {
             CTime CurrentTime = CTime::GetCurrentTime();    //get current Time
             //int iHours   = CurrentTime.GetHour();
             //int iMinutes = CurrentTime.GetMinute();
-            m_Monitor3Dprobe.stTimeRecord[ m_Monitor3Dprobe.iCurrCount-1] = CTime::GetCurrentTime(); //some time function to get the current time. 
+            //m_Monitor3Dprobe.stTimeRecord[ m_Monitor3Dprobe.iCurrCount-1] = CTime::GetCurrentTime(); //some time function to get the current time. 
+            m_Monitor3Dprobe.stTimeRecord.push_back(CTime::GetCurrentTime());
 
-            m_Monitor3Dprobe.stMinExpire[ m_Monitor3Dprobe.iCurrCount-1]= m_Monitor3Dprobe.stTimeRecord[m_Monitor3Dprobe.iCurrCount-1] + CTimeSpan(0, 0, m_iUJamTimeL, 0);    // 1 hour later m_iUJamTimeL;
+            //m_Monitor3Dprobe.stMinExpire[ m_Monitor3Dprobe.iCurrCount-1]= m_Monitor3Dprobe.stTimeRecord[m_Monitor3Dprobe.iCurrCount-1] + CTimeSpan(0, 0, m_iUJamTimeL, 0);    // 1 hour later m_iUJamTimeL;
+            CTime TimeTemp = m_Monitor3Dprobe.stTimeRecord.back() + CTimeSpan(0, 0, m_iUJamTimeL, 0);
+            m_Monitor3Dprobe.stMinExpire.push_back(TimeTemp);
         }
-        //------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------------
         if( m_Monitor3Dprobe.iCurrCount == m_iUJamCount)    //Must inform user max is 10.
         {
             //check all the time records
@@ -99,8 +103,8 @@ int main() {
                 cout<<"\n";
             
             //Time Limit check
-                CTime tLastOne = m_Monitor3Dprobe.stTimeRecord[m_Monitor3Dprobe.iCurrCount-1];  //LastCount Timing which trigger 
-                
+                //CTime tLastOne = m_Monitor3Dprobe.stTimeRecord[m_Monitor3Dprobe.iCurrCount-1];  //LastCount Timing which trigger 
+                CTime tLastOne = m_Monitor3Dprobe.stTimeRecord.back();
                 CTimeSpan tspan = tLastOne - m_Monitor3Dprobe.stTimeRecord[i];             // Subtract 2 CTimes
                 long min = tspan.GetMinutes();
                 cout<<"print out time minute interval is "<<min<<endl;
@@ -111,21 +115,43 @@ int main() {
                     cout<<"Time expired\n";
                     m_Monitor3Dprobe.stTimeRecord[i] = NULL;
 
-                }else
+                   //int sizeOfVect = m_Monitor3Dprobe.stTimeRecord.size();
+                   //cout<<"Currently the size of the Vector is "<<sizeOfVect<<endl;
+
+                    if (i >= m_Monitor3Dprobe.stTimeRecord.size())
+                    {
+                        //clear the all elements in vectors.
+                        m_Monitor3Dprobe.stTimeRecord.clear();
+                        m_Monitor3Dprobe.stMinExpire.clear();
+                    }
+
+                }else  //lesser than the time limit
                 {
                     //Both conditions Jam Count reached and Time limit are fulfilled.
                     //output: AfxMessageBox("Jam Count and time limit reached!", MB_OK | MB_SYSTEMMODAL);
                     //if (m_pDoc->GetUserLevel() > LOGIN_OPERATOR) to reset.
                     cout<<"Print out - Jam Count and time limit hit! "<<endl;
 
+                    //vector<int>::iterator it = i;
+                    int j = i;
+                    while(j<m_Monitor3Dprobe.stTimeRecord.size()-1)
+                    {
+                        m_Monitor3Dprobe.stTimeRecord[j] = m_Monitor3Dprobe.stTimeRecord[j+1];
+                        m_Monitor3Dprobe.stMinExpire[j] = m_Monitor3Dprobe.stMinExpire[j+1];
+                        j++;
+                        cout<<"Transfer completed!\n";
+                    }
+                     break;
                 }
-            
-            }
+
+           
+            }//end_of_for
 
 
 
             bEnd =true; //end the whileLoop
-        }
+            m_Monitor3Dprobe.iCurrCount =0;
+        }//end_if_hit the jamcount
 
 
            // if(m_Monitor3Dprobe.iCurrCount ==1)
