@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <algorithm>    //required when using sort()
 //#include <bits/stdc++.h>
 using namespace std;
 
@@ -54,23 +54,24 @@ int find_GCD(vector<int>& num)
 
 cout<<endl;
 //---------------------------------    
-// sort(num.begin(), num.end());
+ // sort(num.begin(), num.end());
   
-//     cout << "Sorted \n";
-//     for (auto x : num)
-//         cout << x << " ";
-//     cout<<endl;
+//      cout << "Sorted \n";
+//      for (auto x : num)
+//          cout << x << " ";
+//      cout<<endl;
 
 //---------Working solution------------------------
     int result = num[0];
-    for (int i = 1; i < num.size(); i++)
+    for (long long unsigned int i = 1; i < num.size(); i++)
     {
-        if(result<num[i])
-        {
-            result = gcd(num[i], result);
-        }else
-            result = gcd(result, num[i]);
+        // if(result<num[i])
+        // {
+        //     result = gcd(num[i], result);
+        // }else
+        //     result = gcd(result, num[i]);
             
+         result = gcd(num[i], result);    //original one!
  
         if(result == 1)
         {
@@ -83,9 +84,10 @@ cout<<endl;
 // Driver code
 int main()
 {
-    int arr[] = { 2, 4, 6, 8, 16 };
+    //int arr[] = { 2, 4, 6, 8, 16 };
     //vector<int> num = {10, 20, 15, 35, 65};
-    vector<int> num = {12, 4, 6, 8, 16};
+    vector<int> num {10,20,15,30}; 
+    //vector<int> num {2,3,5};                              //{12, 4, 6, 8, 16};
     int ans = 0;
     //cout<< num[0].size();
     //cout<< sizeof(arr)<<endl;
