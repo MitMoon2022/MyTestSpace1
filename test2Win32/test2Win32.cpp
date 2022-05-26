@@ -37,6 +37,8 @@ void ReceiveMsg(string &msg)
 
     string      m_strReelBarcode;
 
+    cout<<"ReceiveMsg : "<<msg<<endl;
+
     if (vecToken[0] == m_ArrMSGfromARC[RECEIVED_ALARM])
     {
         //CallJam(E6603_ARC_ALARM_STATE);
@@ -98,7 +100,7 @@ void ReceiveMsg(string &msg)
         CSGManagerSingleton::Instance().SetVariableValue(ARCUnitQtyOfCurrentReel, S2_U4, GetStatus(SVID_UNITREELQTY));
         CSGManagerSingleton::Instance().SendEvent(ARCUnloadCompletedReelsEvent);*/
     }
-
+    cout<<"End of ReceiveMsg()- Invalid.\n";
     //end_of_function
 }
 //Gobal variables:
@@ -113,10 +115,16 @@ int _tmain(int argc, _TCHAR* argv[])
     strRet = "´";
     strRet = "REELBARCODE;12345678";
     strRet = "ALARM;check!";
-    //call function - ReceiveMsg to decode it.
-    ReceiveMsg(strRet);
- 
 
+    strRet = " ´ï";     //real error code from log
+    //call function - ReceiveMsg to decode it.
+    for(auto count = 0; count <100 ; count++)
+    {
+        ReceiveMsg(strRet);
+    }
+
+
+    cout<<"TheEnd"<<endl;
 
     system("pause");
 	return 0;
