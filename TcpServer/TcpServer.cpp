@@ -92,10 +92,10 @@ int main() {
 	//ServerAddr.sin_addr.s_addr = inet_addr("127.0.0.1");	//SERVER_ADDRS.c_str() - keyin or cin>>SERVER_ADDRS
 	// This ip address will change according to the machine
 #pragma warning(suppress : 4996)
-	//ServerAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+	//ServerAddr.sin_addr.s_addr = inet_addr("127.0.0.1");	//self-defined the server ip addr
 
 	ServerAddr.sin_port = htons(port);		//host to networks
-	ServerAddr.sin_addr.S_un.S_addr = htonl(INADDR_ANY);	//any clients could be connect to it.
+	ServerAddr.sin_addr.S_un.S_addr = htonl(INADDR_ANY);	//any clients could be connect to it. auto def Addr
 
 	// Socket Binding
 	if (bind(ListenSocket, (sockaddr*)&ServerAddr, sizeof(ServerAddr)) == SOCKET_ERROR)
