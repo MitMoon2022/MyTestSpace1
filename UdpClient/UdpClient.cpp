@@ -28,7 +28,7 @@ int main()
     printf("Initialised.\n");
 
     // create socket
-    sockaddr_in server;
+   
     int client_socket;
     if ((client_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == SOCKET_ERROR) // <<< UDP socket
     {
@@ -37,6 +37,7 @@ int main()
     }
 
     // setup address structure
+    sockaddr_in server; //ReceiveAddr
     memset((char*)&server, 0, sizeof(server));
     server.sin_family = AF_INET;
     server.sin_port = htons(PORT);
@@ -49,8 +50,8 @@ int main()
         printf("Enter message: ");
         cin.getline(message, BUFLEN);
 
-        // send the message
-        if (sendto(client_socket, message, strlen(message), 0, (sockaddr*)&server, sizeof(sockaddr_in)) == SOCKET_ERROR)
+        // send the message                                                         sizeof(sockaddr_in)
+        if (sendto(client_socket, message, strlen(message), 0, (sockaddr*)&server, sizeof(server)) == SOCKET_ERROR)
         {
             printf("sendto() failed with error code: %d", WSAGetLastError());
             return 3;
