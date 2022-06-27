@@ -50,6 +50,10 @@ int main()
         printf("Enter message: ");
         cin.getline(message, BUFLEN);
 
+        //To end it by client user.
+        if (strcmp(message, "bye") == 0) //if str1 compare str2 are equal return 0;
+            break;
+
         // send the message                                                         sizeof(sockaddr_in)
         if (sendto(client_socket, message, strlen(message), 0, (sockaddr*)&server, sizeof(server)) == SOCKET_ERROR)
         {
