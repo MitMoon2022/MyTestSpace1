@@ -295,3 +295,4 @@ __pycache__/
 /ConsoleIsWithTol/.vs
 /multiple_thread_1/*.sln
 /Singleton/*.vcsprj
+/Singleton/TestingIssues/*.vcxproj
