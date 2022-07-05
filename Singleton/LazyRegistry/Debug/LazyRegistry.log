@@ -1,0 +1,6 @@
+﻿  LocalPrinter.cpp
+  main.cpp
+  PDFPrinter.cpp
+  PrinterProvider.cpp
+  Generating Code...
+LINK : fatal error LNK1104: cannot open file 'D:\jftMit1\MyTestSpace1\Singleton\Debug\LazyRegistry.exe'

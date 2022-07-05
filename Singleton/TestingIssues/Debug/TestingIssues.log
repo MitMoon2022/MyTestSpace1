@@ -1,0 +1,6 @@
+﻿  LocalPrinter.cpp
+  main.cpp
+  Printer.cpp
+  Generating Code...
+D:\jftMit1\MyTestSpace1\Singleton\TestingIssues\Printer.cpp(10): warning C4715: 'Printer::GetInstance': not all control paths return a value
+  TestingIssues.vcxproj -> D:\jftMit1\MyTestSpace1\Singleton\Debug\TestingIssues.exe

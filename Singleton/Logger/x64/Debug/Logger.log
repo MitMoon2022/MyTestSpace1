@@ -1,0 +1,4 @@
+﻿  Logger.cpp
+  main.cpp
+  Generating Code...
+LINK : fatal error LNK1104: cannot open file 'D:\jftMit1\MyTestSpace1\Singleton\x64\Debug\Logger.exe'
