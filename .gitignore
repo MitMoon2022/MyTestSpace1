@@ -296,4 +296,11 @@ __pycache__/
 /multiple_thread_1/*.sln
 /Singleton/**/*.vcxproj
 /Singleton/TestingIssues/*.vcxproj
-*.vcxproj
+/Singleton/Basic/*.vcxproj
+/Singleton/Clock/*.vcxproj
+/Singleton/CRTPSingleton/*.vcxproj
+/Singleton/DestructionPolicies/*.vcxproj
+/Singleton/LazyRegistry/*.vcxproj
+/Singleton/LazySingleton/*.vcxproj
+/Singleton/Logger/*.vcxproj
+/Singleton/Registry/*.vcxproj
