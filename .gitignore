@@ -294,5 +294,5 @@ __pycache__/
 /mySol_1/.vs
 /ConsoleIsWithTol/.vs
 /multiple_thread_1/*.sln
-/Singleton/*.vcsprj
+/Singleton/**/*.vcxprj
 /Singleton/TestingIssues/*.vcxproj
