@@ -296,3 +296,4 @@ __pycache__/
 /multiple_thread_1/*.sln
 /Singleton/**/*.vcxproj
 /Singleton/TestingIssues/*.vcxproj
+*.vcxproj
