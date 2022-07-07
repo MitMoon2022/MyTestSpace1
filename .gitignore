@@ -304,3 +304,4 @@ __pycache__/
 /Singleton/LazySingleton/*.vcxproj
 /Singleton/Logger/*.vcxproj
 /Singleton/Registry/*.vcxproj
+/Singleton/.vs
