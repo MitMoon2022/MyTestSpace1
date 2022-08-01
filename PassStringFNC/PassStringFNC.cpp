@@ -76,6 +76,13 @@ int main()
     std::vector<std::string> vecToken;
     vecToken = keyValue.split(strRet, ';');
 
+   /* if (vecToken.size() > 0) {
+        for (const auto& item : vecToken) {
+            cout << item << "; ";
+        }
+    }
+    cout << endl;*/
+
     //using strcmp function which compare two strings, return:
     //0	 if strings are equal
     //>0 if the first non-matching character in str1 is greater (in ASCII) than that of str2.
