@@ -155,6 +155,8 @@ int GetStatus(int nSVID)
         //string strRet = "NGREELQTY;1234";
         string strRet = "UNITREELQTY;4836";
 
+        //string strRet = "SYSTEMREADY;3";
+
         CKeyValue keyValue;
         std::vector<std::string> vecToken;
         vecToken = keyValue.split(strRet, ';');
