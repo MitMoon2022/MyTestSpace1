@@ -41,11 +41,8 @@ class Account
 	double getState() { return state; }
 	void setState(double x) { state = x; }
 	//bool init(const string&, unsigned long, double);
-<<<<<<< HEAD
 	void display() const; //const;
-=======
-	void display(); //const;
->>>>>>> 3e536b5d1883dcab580934e570cb0e91ebef07f4
+	
 };
 // inline definition of display() as before.
 /*#endif */// _ACCOUNT_

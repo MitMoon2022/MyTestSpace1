@@ -24,11 +24,8 @@ Account::Account(const string& a_name, unsigned long a_nr, double a_state)
 	}
 
 
-<<<<<<< HEAD
+
 	void Account::display() const
-=======
-	void Account::display() //const
->>>>>>> 3e536b5d1883dcab580934e570cb0e91ebef07f4
 	{
 		cout << fixed << setprecision(2)
 			<< "--------------------------------------\n"
