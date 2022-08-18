@@ -13,6 +13,7 @@
 
 #include <iostream>
 #include "account.h"
+<<<<<<< HEAD
 #include "DayTime.h"
 #include <ctime>    //Functions time(), localtime()
 
@@ -29,13 +30,18 @@ const DayTime& currentTime()            // Returns the
     return curTime;
 }
 
+=======
+>>>>>>> 3e536b5d1883dcab580934e570cb0e91ebef07f4
 
 
 using namespace std;
 
+<<<<<<< HEAD
 
 const DayTime& currentTime();   //The current time
 
+=======
+>>>>>>> 3e536b5d1883dcab580934e570cb0e91ebef07f4
 int main()
 {
     std::cout << "Start of Program!\n";
@@ -54,6 +60,7 @@ int main()
    
     // Or by the presently available method init():
     //save.init("Lucky, Luke", 7654321, 1000000.0);
+<<<<<<< HEAD
    //---------------- For DayTime.h --------------------
     DayTime depart1(11, 11, 11), depart2;
 
@@ -82,6 +89,9 @@ int main()
 
 
 
+=======
+   
+>>>>>>> 3e536b5d1883dcab580934e570cb0e91ebef07f4
 
 
     return 0;

@@ -14,10 +14,16 @@ public:
 	DayTime(int h = 0, int m = 0, int s = 0)
 	{
 		overflow = false;
+<<<<<<< HEAD
 		if (!setTime(h, m, s))			// this->setTime(...)
 			hour = minute = second = 0; // hour is equivalent
 	}									// to this->hour etc.
 
+=======
+		if (!setTime(h, m, s)) // this->setTime(...)
+			hour = minute = second = 0; // hour is equivalent
+	} // to this->hour etc.
+>>>>>>> 3e536b5d1883dcab580934e570cb0e91ebef07f4
 	bool setTime(int hour, int minute, int second = 0)
 	{
 		if (hour >= 0 && hour < 24
@@ -32,6 +38,7 @@ public:
 		else
 			return false;
 	}
+<<<<<<< HEAD
 	//= Implementation ========================================================================
 	int getHour() const { return hour; }
 	int getMinute() const { return minute; }
@@ -60,5 +67,18 @@ public:
 	}
 
 
+=======
+	int getHour() const { return hour; }
+	int getMinute() const { return minute; }
+	int getSecond() const { return second; }
+	int asSeconds() const // daytime in seconds
+	{
+		return (60 * 60 * hour + 60 * minute + second);
+	}
+	bool isLess(DayTime t) const // compare *this and t
+	{
+		return asSeconds() < t.asSeconds();
+	} // this->asSeconds() < t.asSeconds();
+>>>>>>> 3e536b5d1883dcab580934e570cb0e91ebef07f4
 };
 #endif // _DAYTIME_
