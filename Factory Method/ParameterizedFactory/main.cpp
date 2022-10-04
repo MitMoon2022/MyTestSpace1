@@ -18,6 +18,7 @@ int main() {
 	app.Open() ;
 	app.Save() ;
 
+	//unique_ptr explained
 	int *p = new int{5} ;
 
 	delete p ;
@@ -30,6 +31,8 @@ int main() {
 		std::make_unique<int>(1),
 		std::make_unique<int>(2)
 	) ;
+
+	//Next lesson - shared_ptr
 
 	auto p4 = std::make_shared<int>(5) ;
 	
