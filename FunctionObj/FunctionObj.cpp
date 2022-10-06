@@ -44,7 +44,7 @@ int main()
     double a = 5.0;
     double b = 10.0;
 
-    BinaryFunction* pAdd = new Add();
+    BinaryFunction* pAdd = new Add();           //declare or create a Function class (object)
     BinaryFunction* pMultiply = new Multiply();
 
     std::cout << "Add: " << binary_op(a, b, pAdd) << std::endl;
