@@ -59,8 +59,9 @@ BOOL CMFC_Dialog1Dlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	// TODO: Add extra initialization here
+   GetDlgItem(IDC_EDIT1)->SetFocus(); //make the cursor start blink at the editbox.
 
-	return TRUE;  // return TRUE  unless you set the focus to a control
+	return FALSE;  // return TRUE  unless you set the focus to a control. Add:Yes, return FALSE.
 }
 
 // If you add a minimize button to your dialog, you will need the code below
